@@ -4,16 +4,18 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EntityEquipment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(MockitoExtension.class)
 public class FeatherFallingBootsTests {
     @Mock
     private EntityEquipment equipment;
@@ -24,22 +26,17 @@ public class FeatherFallingBootsTests {
         ItemStack equipmentItem = mock(ItemStack.class);
         ItemMeta equipmentItemMeta = mock(ItemMeta.class);
         when(equipment.getBoots()).thenReturn(equipmentItem);
-        when(equipmentItem.getItemMeta()).thenReturn(equipmentItemMeta);
-        when(equipmentItemMeta.hasEnchant(Enchantment.PROTECTION_FALL)).thenReturn(true);
-        when(equipmentItemMeta.getEnchantLevel(Enchantment.PROTECTION_FALL)).thenReturn(3);
+        lenient().when(equipmentItem.getItemMeta()).thenReturn(equipmentItemMeta);
+        lenient().when(equipmentItemMeta.hasEnchant(Enchantment.PROTECTION_FALL)).thenReturn(true);
+        lenient().when(equipmentItemMeta.getEnchantLevel(Enchantment.PROTECTION_FALL)).thenReturn(3);
     }
 
     public static void setupBootsWithoutFeatherFalling(EntityEquipment equipment) {
         ItemStack equipmentItem = mock(ItemStack.class);
         ItemMeta equipmentItemMeta = mock(ItemMeta.class);
-        when(equipment.getBoots()).thenReturn(equipmentItem);
-        when(equipmentItem.getItemMeta()).thenReturn(equipmentItemMeta);
-        when(equipmentItemMeta.hasEnchant(Enchantment.PROTECTION_FALL)).thenReturn(false);
-    }
-
-    @BeforeEach
-    public void runBeforeEachTest() {
-        MockitoAnnotations.initMocks(this);
+        lenient().when(equipment.getBoots()).thenReturn(equipmentItem);
+        lenient().when(equipmentItem.getItemMeta()).thenReturn(equipmentItemMeta);
+        lenient().when(equipmentItemMeta.hasEnchant(Enchantment.PROTECTION_FALL)).thenReturn(false);
     }
 
     @Test
@@ -52,17 +49,6 @@ public class FeatherFallingBootsTests {
     @Test
     public void hasFeatherFallingShouldIndicateFalseWhenBootsIsNull() {
         when(equipment.getBoots()).thenReturn(null);
-
-        boots = new FeatherFallingBoots(equipment);
-
-        assertFalse(boots.hasFeatherFalling());
-    }
-
-    @Test
-    public void hasFeatherFallingShouldIndicateFalseWhenBootsMetaIsNull() {
-        ItemStack equipmentItem = mock(ItemStack.class);
-        when(equipment.getBoots()).thenReturn(null);
-        when(equipmentItem.getItemMeta()).thenReturn(null);
 
         boots = new FeatherFallingBoots(equipment);
 
