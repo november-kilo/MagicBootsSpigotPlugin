@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class FarmerBootsOnPlayerInteractTests {
+public class PlayerInteractListenerTests {
     @Mock
     private PlayerInteractEvent event;
 
@@ -31,11 +31,11 @@ public class FarmerBootsOnPlayerInteractTests {
     @Mock
     private EntityEquipment equipment;
 
-    private FarmerBootsOnPlayerInteract eventHandler;
+    private PlayerInteractListener eventHandler;
 
     @BeforeEach
     public void runBeforeEachTest() {
-        eventHandler = new FarmerBootsOnPlayerInteract();
+        eventHandler = new PlayerInteractListener();
     }
 
     @Test

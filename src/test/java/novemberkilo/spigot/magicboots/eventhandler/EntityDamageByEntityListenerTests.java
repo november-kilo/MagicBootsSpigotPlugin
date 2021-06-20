@@ -18,7 +18,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class EnderBootsOnEntityDamageByEntityTests {
+public class EntityDamageByEntityListenerTests {
     @Mock
     private EntityDamageByEntityEvent event;
 
@@ -28,11 +28,11 @@ public class EnderBootsOnEntityDamageByEntityTests {
     @Mock
     private EntityEquipment equipment;
 
-    private EnderBootsOnEntityDamageByEntity eventHandler;
+    private EntityDamageByEntityListener eventHandler;
 
     @BeforeEach
     public void runBeforeEachTest() {
-        eventHandler = new EnderBootsOnEntityDamageByEntity();
+        eventHandler = new EntityDamageByEntityListener();
     }
 
     @Test
