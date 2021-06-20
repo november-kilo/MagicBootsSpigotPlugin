@@ -1,6 +1,6 @@
-package novemberkilo.spigot.magicboots.eventhandler;
+package novemberkilo.spigot.magicboots.listener;
 
-import novemberkilo.spigot.magicboots.FeatherFallingBootsTests;
+import novemberkilo.spigot.magicboots.boots.MagicBootsTests;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -61,7 +61,7 @@ public class EntityDamageByEntityListenerTests {
         Player entity = mock(Player.class);
         when(event.getDamager()).thenReturn(enderPearl);
         when(event.getEntity()).thenReturn(entity);
-        FeatherFallingBootsTests.setupBootsWithoutFeatherFalling(equipment);
+        MagicBootsTests.setupBootsWithoutFeatherFalling(equipment);
 
         eventHandler.onEntityDamageByEntity(event);
 
@@ -74,7 +74,7 @@ public class EntityDamageByEntityListenerTests {
         when(event.getDamager()).thenReturn(enderPearl);
         when(event.getEntity()).thenReturn(entity);
         when(entity.getEquipment()).thenReturn(equipment);
-        FeatherFallingBootsTests.setupBootsWithFeatherFalling(equipment);
+        MagicBootsTests.setupBootsWithFeatherFalling(equipment);
 
         eventHandler.onEntityDamageByEntity(event);
 

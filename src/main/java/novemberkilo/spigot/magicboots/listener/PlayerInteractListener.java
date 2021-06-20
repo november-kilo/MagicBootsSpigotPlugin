@@ -1,6 +1,6 @@
-package novemberkilo.spigot.magicboots.eventhandler;
+package novemberkilo.spigot.magicboots.listener;
 
-import novemberkilo.spigot.magicboots.FeatherFallingBoots;
+import novemberkilo.spigot.magicboots.boots.MagicBoots;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
@@ -23,7 +23,7 @@ public class PlayerInteractListener implements Listener {
         @Override
         public void accept(Block block) {
             if (block.getType() == Material.FARMLAND) {
-                FeatherFallingBoots boots = new FeatherFallingBoots(event.getPlayer().getEquipment());
+                MagicBoots boots = new MagicBoots(event.getPlayer().getEquipment());
                 event.setCancelled(boots.hasFeatherFalling());
             }
         }

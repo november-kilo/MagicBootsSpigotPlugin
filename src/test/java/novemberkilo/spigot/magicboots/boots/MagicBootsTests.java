@@ -1,4 +1,4 @@
-package novemberkilo.spigot.magicboots;
+package novemberkilo.spigot.magicboots.boots;
 
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.EntityEquipment;
@@ -11,37 +11,41 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class FeatherFallingBootsTests {
+public class MagicBootsTests {
     @Mock
     private EntityEquipment equipment;
 
-    private FeatherFallingBoots boots;
+    private MagicBoots boots;
 
-    public static void setupBootsWithFeatherFalling(EntityEquipment equipment) {
+    public static ItemMeta makeBootsItemMeta(EntityEquipment equipment) {
         ItemStack equipmentItem = mock(ItemStack.class);
         ItemMeta equipmentItemMeta = mock(ItemMeta.class);
-        when(equipment.getBoots()).thenReturn(equipmentItem);
+        lenient().when(equipment.getBoots()).thenReturn(equipmentItem);
         lenient().when(equipmentItem.getItemMeta()).thenReturn(equipmentItemMeta);
+
+        return equipmentItemMeta;
+    }
+
+    public static void setupBootsWithFeatherFalling(EntityEquipment equipment) {
+        ItemMeta equipmentItemMeta = makeBootsItemMeta(equipment);
         lenient().when(equipmentItemMeta.hasEnchant(Enchantment.PROTECTION_FALL)).thenReturn(true);
         lenient().when(equipmentItemMeta.getEnchantLevel(Enchantment.PROTECTION_FALL)).thenReturn(3);
     }
 
     public static void setupBootsWithoutFeatherFalling(EntityEquipment equipment) {
-        ItemStack equipmentItem = mock(ItemStack.class);
-        ItemMeta equipmentItemMeta = mock(ItemMeta.class);
-        lenient().when(equipment.getBoots()).thenReturn(equipmentItem);
-        lenient().when(equipmentItem.getItemMeta()).thenReturn(equipmentItemMeta);
+        ItemMeta equipmentItemMeta = makeBootsItemMeta(equipment);
         lenient().when(equipmentItemMeta.hasEnchant(Enchantment.PROTECTION_FALL)).thenReturn(false);
     }
 
     @Test
     public void hasFeatherFallingShouldIndicateFalseWhenEquipmentIsNull() {
-        boots = new FeatherFallingBoots(null);
+        boots = new MagicBoots(null);
 
         assertFalse(boots.hasFeatherFalling());
     }
@@ -50,7 +54,7 @@ public class FeatherFallingBootsTests {
     public void hasFeatherFallingShouldIndicateFalseWhenBootsIsNull() {
         when(equipment.getBoots()).thenReturn(null);
 
-        boots = new FeatherFallingBoots(equipment);
+        boots = new MagicBoots(equipment);
 
         assertFalse(boots.hasFeatherFalling());
     }
@@ -59,7 +63,7 @@ public class FeatherFallingBootsTests {
     public void hasFeatherFallingShouldIndicateFalseWhenBootsMetaHasNoFeatherFallingEnchantment() {
         setupBootsWithoutFeatherFalling(equipment);
 
-        boots = new FeatherFallingBoots(equipment);
+        boots = new MagicBoots(equipment);
 
         assertFalse(boots.hasFeatherFalling());
     }
@@ -68,7 +72,7 @@ public class FeatherFallingBootsTests {
     public void hasFeatherFallingShouldIndicateTrueWhenBootsMetaHasFeatherFallingEnchantment() {
         setupBootsWithFeatherFalling(equipment);
 
-        boots = new FeatherFallingBoots(equipment);
+        boots = new MagicBoots(equipment);
 
         assertTrue(boots.hasFeatherFalling());
     }

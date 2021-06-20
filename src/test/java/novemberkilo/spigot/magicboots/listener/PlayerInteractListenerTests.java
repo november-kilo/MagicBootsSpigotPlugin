@@ -1,6 +1,6 @@
-package novemberkilo.spigot.magicboots.eventhandler;
+package novemberkilo.spigot.magicboots.listener;
 
-import novemberkilo.spigot.magicboots.FeatherFallingBootsTests;
+import novemberkilo.spigot.magicboots.boots.MagicBootsTests;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -73,7 +73,7 @@ public class PlayerInteractListenerTests {
         when(event.getAction()).thenReturn(Action.PHYSICAL);
         when(block.getType()).thenReturn(Material.FARMLAND);
         when(event.getClickedBlock()).thenReturn(block);
-        FeatherFallingBootsTests.setupBootsWithoutFeatherFalling(equipment);
+        MagicBootsTests.setupBootsWithoutFeatherFalling(equipment);
         when(player.getEquipment()).thenReturn(equipment);
         when(event.getPlayer()).thenReturn(player);
 
@@ -87,7 +87,7 @@ public class PlayerInteractListenerTests {
         when(event.getAction()).thenReturn(Action.PHYSICAL);
         when(block.getType()).thenReturn(Material.FARMLAND);
         when(event.getClickedBlock()).thenReturn(block);
-        FeatherFallingBootsTests.setupBootsWithFeatherFalling(equipment);
+        MagicBootsTests.setupBootsWithFeatherFalling(equipment);
         when(player.getEquipment()).thenReturn(equipment);
         when(event.getPlayer()).thenReturn(player);
 

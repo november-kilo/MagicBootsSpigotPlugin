@@ -1,6 +1,6 @@
-package novemberkilo.spigot.magicboots.eventhandler;
+package novemberkilo.spigot.magicboots.listener;
 
-import novemberkilo.spigot.magicboots.FeatherFallingBoots;
+import novemberkilo.spigot.magicboots.boots.MagicBoots;
 import org.bukkit.entity.EnderPearl;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -11,7 +11,7 @@ public class EntityDamageByEntityListener implements Listener {
     @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent event) {
         if (event.getDamager() instanceof EnderPearl && event.getEntity() instanceof Player damagee) {
-            FeatherFallingBoots boots = new FeatherFallingBoots(damagee.getEquipment());
+            MagicBoots boots = new MagicBoots(damagee.getEquipment());
             event.setCancelled(boots.hasFeatherFalling());
         }
     }

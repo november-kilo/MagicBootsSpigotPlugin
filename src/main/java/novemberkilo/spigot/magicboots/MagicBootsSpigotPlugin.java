@@ -1,7 +1,7 @@
 package novemberkilo.spigot.magicboots;
 
-import novemberkilo.spigot.magicboots.eventhandler.EntityDamageByEntityListener;
-import novemberkilo.spigot.magicboots.eventhandler.PlayerInteractListener;
+import novemberkilo.spigot.magicboots.listener.EntityDamageByEntityListener;
+import novemberkilo.spigot.magicboots.listener.PlayerInteractListener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
